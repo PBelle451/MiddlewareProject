@@ -31,9 +31,10 @@ public class CepService {
             throw new ApiException("CEP inválido: deve ter 8 dígitos", 400);
         }
 
-        CepResponse response = CepClient.getCep(cleanCep);
+        CepResponse response = client.getCep(cleanCep);
+
         if (response == null || response.getCep() == null) {
-            throw new ApiException("CEP não encontrado", 404);
+            throw new ApiException("CEP não encontrado.", 404);
         }
 
         Address address = mapper.toAddress(response);
