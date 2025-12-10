@@ -1,8 +1,10 @@
 package com.example.middleware.dto.external;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CepResponse {
     private String cep;
     private String logradouro;

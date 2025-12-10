@@ -1,24 +1,13 @@
 package com.example.middleware.client;
 
 import com.example.middleware.dto.external.CepResponse;
-import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-@Component
-public class CepClient {
+@FeignClient(name = "cepClient", url = "${viacep.url}", configuration = com.example.middleware.config.FeignConfig.class)
+public interface CepClient {
 
-    private final WebClient webClient;
-
-    public CepClient(WebClient webClient) {
-        this.webClient = webClient;
-    }
-
-    public CepResponse buscarCep(String cep) {
-        return webClient
-                .get()
-                .uri("https://viacep.com.br/ws/" + cep + "/json/")
-                .retrieve()
-                .bodyToMono(CepResponse.class)
-                .block();
-    }
+    @GetMapping("/{cep}/json/")
+    CepResponse getCep(@PathVariable("cep") String cep);
 }

@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalHandler {
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ApiException> handleIllegalArgumentO(IllegalArgumentException e) {
-        ApiException error = new ApiException(e.getMessage(), 400);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+
+    @ExceptionHandler(ApiException.class)
+    public ResponseEntity<ApiError> handleApiException(ApiException ex) {
+        ApiError error = new ApiError(ex.getMessage(), ex.getStatus());
+        return ResponseEntity.status(ex.getStatus()).body(error);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiException> handleGeneral(Exception e) {
-        ApiException error = new ApiException("Erro interno no servidor", 500);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    public ResponseEntity<ApiError> handleGeneral(Exception ex) {
+        ApiError error = new ApiError("Erro interno no servidor", 500);
+        return ResponseEntity.status(500).body(error);
     }
 }

@@ -1,11 +1,14 @@
 package com.example.middleware.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+public class ApiException extends RuntimeException {
+    private final int status;
 
-@Data
-@AllArgsConstructor
-public class ApiException {
-    private String message;
-    private int status;
+    public ApiException(String message, int status) {
+     super(message);
+     this.status = status;
+    }
+
+    public int getStatus(){
+        return status;
+    }
 }
