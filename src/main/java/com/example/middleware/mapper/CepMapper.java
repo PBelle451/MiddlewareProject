@@ -8,19 +8,15 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface CepMapper {
-    @Mapping(source = "logradouro", target = "street")
-    @Mapping(source = "bairro", target = "district")
-    @Mapping(source = "localidade", target = "city")
-    @Mapping(source = "uf", target = "state")
-    @Mapping(source = "cep", target = "zipCode")
+
+    @Mapping(target = "rua", source = "logradouro")
+    @Mapping(target = "bairro", source = "bairro")
+    @Mapping(target = "cidade", source = "localidade")
+    @Mapping(target = "estado", source = "uf")
+    @Mapping(target = "cep", source = "cep")
+    @Mapping(target = "numero", ignore = true)
     Address toAddress(CepResponse response);
 
-    @Mapping(source = "street", target = "rua")
-    @Mapping(source = "number", target = "numero")
-    @Mapping(source = "district", target = "bairro")
-    @Mapping(source = "city", target = "cidade")
-    @Mapping(source = "state", target = "estado")
-    @Mapping(source = "zipCode", target = "cep")
+    // Address → EnderecoDTO (nomes iguais, mapeia sozinho)
     EnderecoDTO toDTO(Address address);
-
 }

@@ -43,7 +43,7 @@ class CepServiceTest {
         external.setUf("SP");
 
         Address domain = new Address();
-        domain.setStreet("Praça da Sé");
+        domain.setRua("Rua 1");
 
         EnderecoDTO dto = new EnderecoDTO();
         dto.setCep("01001000");

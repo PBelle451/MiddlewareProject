@@ -21,18 +21,18 @@ class CepMapperTest {
 
         Address address = mapper.toAddress(res);
 
-        assertEquals("Praça da Sé", address.getStreet());
-        assertEquals("Sé", address.getDistrict());
+        assertEquals("Praça da Sé", address.getRua());
+        assertEquals("Sé", address.getBairro());
     }
 
     @Test
     void deveConverterAddressParaDTO() {
         Address a = new Address();
-        a.setStreet("Praça da Sé");
-        a.setDistrict("Sé");
-        a.setCity("São Paulo");
-        a.setState("SP");
-        a.setZipCode("01001000");
+        a.setRua("Praça da Sé");
+        a.setBairro("Sé");
+        a.setCidade("São Paulo");
+        a.setEstado("SP");
+        a.setCep("01001000");
 
         EnderecoDTO dto = mapper.toDTO(a);
 
